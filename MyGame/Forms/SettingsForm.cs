@@ -9,7 +9,12 @@ namespace MyGame.Forms
         {
             InitializeComponent();
             SetMarkedDifficulty((int)Properties.Settings.Default["Difficulty"]);
-            SetMarkedshape((int)Properties.Settings.Default["Shape"]);
+            SetMarkedShape((int)Properties.Settings.Default["Shape"]);
+
+            if (radiobuttonCustom.Checked)
+            {
+                // TODO: Save custom dimensions
+            }
         }
 
         private void radiobuttonCustom_CheckedChanged(object sender, EventArgs e)
@@ -87,7 +92,7 @@ namespace MyGame.Forms
             return 2;
         }
 
-        private void SetMarkedshape(int shape)
+        private void SetMarkedShape(int shape)
         {
             switch (shape)
             {

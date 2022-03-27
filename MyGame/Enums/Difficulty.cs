@@ -5,6 +5,6 @@
         Easy = 1,
         Normal = 2,
         Hard = 3,
-        Custom = 4,
+        Custom = 9,
     }
 }
