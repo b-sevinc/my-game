@@ -19,7 +19,8 @@ namespace MyGame.Forms
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            if (true) // TODO:Login
+            if (usernameTextbox.Text == "admin" && passwordTextbox.Text == "admin" 
+                || usernameTextbox.Text == "user" && passwordTextbox.Text == "user")
             {
                 Hide();
                 GameForm gameForm = new GameForm();
@@ -29,6 +30,18 @@ namespace MyGame.Forms
             {
                 MessageBox.Show("Invalid username or password.");
             }
+        }
+
+        private void usernameTextbox_Enter(object sender, EventArgs e)
+        {
+            usernameTextbox.SelectAll();
+            usernameTextbox.Focus();
+        }
+
+        private void passwordTextbox_Enter(object sender, EventArgs e)
+        {
+            passwordTextbox.SelectAll();
+            passwordTextbox.Focus();
         }
     }
 }

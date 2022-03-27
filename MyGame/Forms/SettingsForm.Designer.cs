@@ -82,7 +82,7 @@ namespace MyGame.Forms
             // 
             // labelWidth
             // 
-            this.labelWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.labelWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelWidth.Location = new System.Drawing.Point(6, 54);
             this.labelWidth.Name = "labelWidth";
             this.labelWidth.Size = new System.Drawing.Size(66, 26);
@@ -92,7 +92,7 @@ namespace MyGame.Forms
             // 
             // labelLength
             // 
-            this.labelLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.labelLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelLength.Location = new System.Drawing.Point(6, 21);
             this.labelLength.Name = "labelLength";
             this.labelLength.Size = new System.Drawing.Size(66, 26);
@@ -205,6 +205,7 @@ namespace MyGame.Forms
             this.buttonSaveSettings.TabIndex = 2;
             this.buttonSaveSettings.Text = "Save";
             this.buttonSaveSettings.UseVisualStyleBackColor = true;
+            this.buttonSaveSettings.Click += new System.EventHandler(this.buttonSaveSettings_Click);
             // 
             // buttonCancelSettings
             // 
@@ -236,6 +237,7 @@ namespace MyGame.Forms
             this.groupboxCustomSize.PerformLayout();
             this.groupboxShape.ResumeLayout(false);
             this.ResumeLayout(false);
+
         }
 
         private System.Windows.Forms.RadioButton radiobuttonTriangle;

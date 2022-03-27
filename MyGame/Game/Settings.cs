@@ -1,31 +1,28 @@
-﻿using System;
-using System.Configuration;
-using System.Windows.Forms;
-using MyGame.Enums;
-using MyGame.Forms;
-
-namespace MyGame.Game
-{
-    public sealed class Setting
-    {
-        private static Setting instance;
-        private static readonly object padlock = new object();
-        private Difficulty difficulty;
-        private Shape shape;
-
-        private Setting()
-        {
+﻿namespace MyGame.Properties {
+    
+    
+    // This class allows you to handle specific events on the settings class:
+    //  The SettingChanging event is raised before a setting's value is changed.
+    //  The PropertyChanged event is raised after a setting's value is changed.
+    //  The SettingsLoaded event is raised after the setting values are loaded.
+    //  The SettingsSaving event is raised before the setting values are saved.
+    internal sealed partial class Settings {
+        
+        public Settings() {
+            // // To add event handlers for saving and changing settings, uncomment the lines below:
+            //
+            // this.SettingChanging += this.SettingChangingEventHandler;
+            //
+            // this.SettingsSaving += this.SettingsSavingEventHandler;
+            //
         }
-
-        public static Setting Instance
-        {
-            get
-            {
-                lock (padlock)
-                {
-                    return instance ?? (instance = new Setting());
-                }
-            }
+        
+        private void SettingChangingEventHandler(object sender, System.Configuration.SettingChangingEventArgs e) {
+            // Add code to handle the SettingChangingEvent event here.
+        }
+        
+        private void SettingsSavingEventHandler(object sender, System.ComponentModel.CancelEventArgs e) {
+            // Add code to handle the SettingsSaving event here.
         }
     }
 }
