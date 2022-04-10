@@ -37,13 +37,13 @@ namespace MyGame.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int Shape {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Circle {
             get {
-                return ((int)(this["Shape"]));
+                return ((bool)(this["Circle"]));
             }
             set {
-                this["Shape"] = value;
+                this["Circle"] = value;
             }
         }
         
@@ -80,6 +80,30 @@ namespace MyGame.Properties {
             }
             set {
                 this["Blue"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Square {
+            get {
+                return ((bool)(this["Square"]));
+            }
+            set {
+                this["Square"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Triangle {
+            get {
+                return ((bool)(this["Triangle"]));
+            }
+            set {
+                this["Triangle"] = value;
             }
         }
     }

@@ -10,7 +10,9 @@ namespace MyGame.Forms
             var settings = Properties.Settings.Default;
             InitializeComponent();
             SetMarkedDifficulty((int)settings["Difficulty"]);
-            SetMarkedShape((int)settings["Shape"]);
+            checkBoxCircle.Checked = (bool) settings["Circle"];
+            checkBoxSquare.Checked = (bool) settings["Square"];
+            checkBoxTriangle.Checked = (bool) settings["Triangle"];
             checkboxRed.Checked = (bool) settings["Red"];
             checkboxGreen.Checked = (bool) settings["Green"];
             checkboxBlue.Checked = (bool) settings["Blue"];
@@ -24,12 +26,11 @@ namespace MyGame.Forms
         private void radiobuttonCustom_CheckedChanged(object sender, EventArgs e)
         {
             groupboxCustomSize.Enabled = radiobuttonCustom.Checked;
+
+            if (groupboxCustomSize.Enabled) return;
             
-            if (!groupboxCustomSize.Enabled)
-            {
-                textboxLength.Text = "";
-                textboxWidth.Text = "";
-            }
+            textboxLength.Text = "";
+            textboxWidth.Text = "";
         }
 
         private void buttonCancelSettings_Click(object sender, EventArgs e)
@@ -40,7 +41,9 @@ namespace MyGame.Forms
         private void buttonSaveSettings_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default["Difficulty"] = GetMarkedDifficulty();
-            Properties.Settings.Default["Shape"] = GetMarkedShape();
+            Properties.Settings.Default["Circle"] = checkBoxCircle.Checked;
+            Properties.Settings.Default["Square"] = checkBoxSquare.Checked;
+            Properties.Settings.Default["Triangle"] = checkBoxTriangle.Checked;
             Properties.Settings.Default["Red"] = checkboxRed.Checked;
             Properties.Settings.Default["Green"] = checkboxGreen.Checked;
             Properties.Settings.Default["Blue"] = checkboxBlue.Checked;
@@ -81,37 +84,6 @@ namespace MyGame.Forms
                     break;
                 default:
                     radiobuttonCustom.Checked = true;
-                    break;
-            }
-        }
-
-        private int GetMarkedShape()
-        {
-            if (radiobuttonCircle.Checked)
-            {
-                return 0;
-            }
-
-            if (radiobuttonSquare.Checked)
-            {
-                return 1;
-            }
-
-            return 2;
-        }
-
-        private void SetMarkedShape(int shape)
-        {
-            switch (shape)
-            {
-                case 0:
-                    radiobuttonCircle.Checked = true;
-                    break;
-                case 1:
-                    radiobuttonSquare.Checked = true;
-                    break;
-                default:
-                    radiobuttonTriangle.Checked = true;
                     break;
             }
         }
