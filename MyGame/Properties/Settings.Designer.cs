@@ -46,5 +46,41 @@ namespace MyGame.Properties {
                 this["Shape"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Red {
+            get {
+                return ((bool)(this["Red"]));
+            }
+            set {
+                this["Red"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Green {
+            get {
+                return ((bool)(this["Green"]));
+            }
+            set {
+                this["Green"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Blue {
+            get {
+                return ((bool)(this["Blue"]));
+            }
+            set {
+                this["Blue"] = value;
+            }
+        }
     }
 }

@@ -47,9 +47,14 @@ namespace MyGame.Forms
             this.radiobuttonCircle = new System.Windows.Forms.RadioButton();
             this.buttonSaveSettings = new System.Windows.Forms.Button();
             this.buttonCancelSettings = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkboxBlue = new System.Windows.Forms.CheckBox();
+            this.checkboxGreen = new System.Windows.Forms.CheckBox();
+            this.checkboxRed = new System.Windows.Forms.CheckBox();
             this.groupboxDifficulty.SuspendLayout();
             this.groupboxCustomSize.SuspendLayout();
             this.groupboxShape.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupboxDifficulty
@@ -82,7 +87,7 @@ namespace MyGame.Forms
             // 
             // labelWidth
             // 
-            this.labelWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.labelWidth.Location = new System.Drawing.Point(6, 54);
             this.labelWidth.Name = "labelWidth";
             this.labelWidth.Size = new System.Drawing.Size(66, 26);
@@ -92,7 +97,7 @@ namespace MyGame.Forms
             // 
             // labelLength
             // 
-            this.labelLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.labelLength.Location = new System.Drawing.Point(6, 21);
             this.labelLength.Name = "labelLength";
             this.labelLength.Size = new System.Drawing.Size(66, 26);
@@ -199,7 +204,7 @@ namespace MyGame.Forms
             // 
             // buttonSaveSettings
             // 
-            this.buttonSaveSettings.Location = new System.Drawing.Point(108, 257);
+            this.buttonSaveSettings.Location = new System.Drawing.Point(95, 435);
             this.buttonSaveSettings.Name = "buttonSaveSettings";
             this.buttonSaveSettings.Size = new System.Drawing.Size(155, 41);
             this.buttonSaveSettings.TabIndex = 2;
@@ -210,7 +215,7 @@ namespace MyGame.Forms
             // buttonCancelSettings
             // 
             this.buttonCancelSettings.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancelSettings.Location = new System.Drawing.Point(340, 257);
+            this.buttonCancelSettings.Location = new System.Drawing.Point(340, 435);
             this.buttonCancelSettings.Name = "buttonCancelSettings";
             this.buttonCancelSettings.Size = new System.Drawing.Size(155, 41);
             this.buttonCancelSettings.TabIndex = 3;
@@ -218,13 +223,53 @@ namespace MyGame.Forms
             this.buttonCancelSettings.UseVisualStyleBackColor = true;
             this.buttonCancelSettings.Click += new System.EventHandler(this.buttonCancelSettings_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.checkboxBlue);
+            this.groupBox1.Controls.Add(this.checkboxGreen);
+            this.groupBox1.Controls.Add(this.checkboxRed);
+            this.groupBox1.Location = new System.Drawing.Point(12, 280);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(604, 102);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Shape";
+            // 
+            // checkboxBlue
+            // 
+            this.checkboxBlue.Location = new System.Drawing.Point(386, 34);
+            this.checkboxBlue.Name = "checkboxBlue";
+            this.checkboxBlue.Size = new System.Drawing.Size(110, 42);
+            this.checkboxBlue.TabIndex = 5;
+            this.checkboxBlue.Text = "Blue";
+            this.checkboxBlue.UseVisualStyleBackColor = true;
+            // 
+            // checkboxGreen
+            // 
+            this.checkboxGreen.Location = new System.Drawing.Point(231, 34);
+            this.checkboxGreen.Name = "checkboxGreen";
+            this.checkboxGreen.Size = new System.Drawing.Size(110, 42);
+            this.checkboxGreen.TabIndex = 4;
+            this.checkboxGreen.Text = "Green";
+            this.checkboxGreen.UseVisualStyleBackColor = true;
+            // 
+            // checkboxRed
+            // 
+            this.checkboxRed.Location = new System.Drawing.Point(96, 34);
+            this.checkboxRed.Name = "checkboxRed";
+            this.checkboxRed.Size = new System.Drawing.Size(110, 42);
+            this.checkboxRed.TabIndex = 3;
+            this.checkboxRed.Text = "Red";
+            this.checkboxRed.UseVisualStyleBackColor = true;
+            // 
             // SettingsForm
             // 
             this.AcceptButton = this.buttonSaveSettings;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancelSettings;
-            this.ClientSize = new System.Drawing.Size(628, 326);
+            this.ClientSize = new System.Drawing.Size(628, 506);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonCancelSettings);
             this.Controls.Add(this.buttonSaveSettings);
             this.Controls.Add(this.groupboxShape);
@@ -232,13 +277,20 @@ namespace MyGame.Forms
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "SettingsForm";
             this.Text = "Settings";
+            this.TopMost = true;
             this.groupboxDifficulty.ResumeLayout(false);
             this.groupboxCustomSize.ResumeLayout(false);
             this.groupboxCustomSize.PerformLayout();
             this.groupboxShape.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
-
         }
+
+        private System.Windows.Forms.CheckBox checkboxRed;
+        private System.Windows.Forms.CheckBox checkboxGreen;
+        private System.Windows.Forms.CheckBox checkboxBlue;
+
+        private System.Windows.Forms.GroupBox groupBox1;
 
         private System.Windows.Forms.RadioButton radiobuttonTriangle;
 

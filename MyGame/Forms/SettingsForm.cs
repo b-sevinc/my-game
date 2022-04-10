@@ -7,9 +7,13 @@ namespace MyGame.Forms
     {
         public SettingsForm()
         {
+            var settings = Properties.Settings.Default;
             InitializeComponent();
-            SetMarkedDifficulty((int)Properties.Settings.Default["Difficulty"]);
-            SetMarkedShape((int)Properties.Settings.Default["Shape"]);
+            SetMarkedDifficulty((int)settings["Difficulty"]);
+            SetMarkedShape((int)settings["Shape"]);
+            checkboxRed.Checked = (bool) settings["Red"];
+            checkboxGreen.Checked = (bool) settings["Green"];
+            checkboxBlue.Checked = (bool) settings["Blue"];
 
             if (radiobuttonCustom.Checked)
             {
@@ -37,7 +41,11 @@ namespace MyGame.Forms
         {
             Properties.Settings.Default["Difficulty"] = GetMarkedDifficulty();
             Properties.Settings.Default["Shape"] = GetMarkedShape();
+            Properties.Settings.Default["Red"] = checkboxRed.Checked;
+            Properties.Settings.Default["Green"] = checkboxGreen.Checked;
+            Properties.Settings.Default["Blue"] = checkboxBlue.Checked;
             Properties.Settings.Default.Save();
+            Hide();
         }
 
         private int GetMarkedDifficulty()
