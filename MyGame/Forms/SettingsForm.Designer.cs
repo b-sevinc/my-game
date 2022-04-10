@@ -42,15 +42,15 @@ namespace MyGame.Forms
             this.radioButtonNormal = new System.Windows.Forms.RadioButton();
             this.radiobuttonEasy = new System.Windows.Forms.RadioButton();
             this.groupboxShape = new System.Windows.Forms.GroupBox();
-            this.radiobuttonTriangle = new System.Windows.Forms.RadioButton();
-            this.radiobuttonSquare = new System.Windows.Forms.RadioButton();
-            this.radiobuttonCircle = new System.Windows.Forms.RadioButton();
             this.buttonSaveSettings = new System.Windows.Forms.Button();
             this.buttonCancelSettings = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkboxBlue = new System.Windows.Forms.CheckBox();
             this.checkboxGreen = new System.Windows.Forms.CheckBox();
             this.checkboxRed = new System.Windows.Forms.CheckBox();
+            this.checkBoxCircle = new System.Windows.Forms.CheckBox();
+            this.checkBoxSquare = new System.Windows.Forms.CheckBox();
+            this.checkBoxTriangle = new System.Windows.Forms.CheckBox();
             this.groupboxDifficulty.SuspendLayout();
             this.groupboxCustomSize.SuspendLayout();
             this.groupboxShape.SuspendLayout();
@@ -162,45 +162,15 @@ namespace MyGame.Forms
             // 
             // groupboxShape
             // 
-            this.groupboxShape.Controls.Add(this.radiobuttonTriangle);
-            this.groupboxShape.Controls.Add(this.radiobuttonSquare);
-            this.groupboxShape.Controls.Add(this.radiobuttonCircle);
+            this.groupboxShape.Controls.Add(this.checkBoxTriangle);
+            this.groupboxShape.Controls.Add(this.checkBoxSquare);
+            this.groupboxShape.Controls.Add(this.checkBoxCircle);
             this.groupboxShape.Location = new System.Drawing.Point(12, 137);
             this.groupboxShape.Name = "groupboxShape";
             this.groupboxShape.Size = new System.Drawing.Size(604, 102);
             this.groupboxShape.TabIndex = 1;
             this.groupboxShape.TabStop = false;
             this.groupboxShape.Text = "Shape";
-            // 
-            // radiobuttonTriangle
-            // 
-            this.radiobuttonTriangle.Location = new System.Drawing.Point(386, 41);
-            this.radiobuttonTriangle.Name = "radiobuttonTriangle";
-            this.radiobuttonTriangle.Size = new System.Drawing.Size(122, 38);
-            this.radiobuttonTriangle.TabIndex = 2;
-            this.radiobuttonTriangle.TabStop = true;
-            this.radiobuttonTriangle.Text = "Triangle ▲";
-            this.radiobuttonTriangle.UseVisualStyleBackColor = true;
-            // 
-            // radiobuttonSquare
-            // 
-            this.radiobuttonSquare.Location = new System.Drawing.Point(231, 41);
-            this.radiobuttonSquare.Name = "radiobuttonSquare";
-            this.radiobuttonSquare.Size = new System.Drawing.Size(122, 38);
-            this.radiobuttonSquare.TabIndex = 1;
-            this.radiobuttonSquare.TabStop = true;
-            this.radiobuttonSquare.Text = "Square ■";
-            this.radiobuttonSquare.UseVisualStyleBackColor = true;
-            // 
-            // radiobuttonCircle
-            // 
-            this.radiobuttonCircle.Location = new System.Drawing.Point(96, 41);
-            this.radiobuttonCircle.Name = "radiobuttonCircle";
-            this.radiobuttonCircle.Size = new System.Drawing.Size(98, 38);
-            this.radiobuttonCircle.TabIndex = 0;
-            this.radiobuttonCircle.TabStop = true;
-            this.radiobuttonCircle.Text = "Circle ●";
-            this.radiobuttonCircle.UseVisualStyleBackColor = true;
             // 
             // buttonSaveSettings
             // 
@@ -262,6 +232,33 @@ namespace MyGame.Forms
             this.checkboxRed.Text = "Red";
             this.checkboxRed.UseVisualStyleBackColor = true;
             // 
+            // checkBoxCircle
+            // 
+            this.checkBoxCircle.Location = new System.Drawing.Point(96, 41);
+            this.checkBoxCircle.Name = "checkBoxCircle";
+            this.checkBoxCircle.Size = new System.Drawing.Size(110, 42);
+            this.checkBoxCircle.TabIndex = 6;
+            this.checkBoxCircle.Text = "Circle ●";
+            this.checkBoxCircle.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxSquare
+            // 
+            this.checkBoxSquare.Location = new System.Drawing.Point(231, 41);
+            this.checkBoxSquare.Name = "checkBoxSquare";
+            this.checkBoxSquare.Size = new System.Drawing.Size(110, 42);
+            this.checkBoxSquare.TabIndex = 5;
+            this.checkBoxSquare.Text = "Square ■";
+            this.checkBoxSquare.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxTriangle
+            // 
+            this.checkBoxTriangle.Location = new System.Drawing.Point(386, 41);
+            this.checkBoxTriangle.Name = "checkBoxTriangle";
+            this.checkBoxTriangle.Size = new System.Drawing.Size(110, 42);
+            this.checkBoxTriangle.TabIndex = 6;
+            this.checkBoxTriangle.Text = "Triangle ▲";
+            this.checkBoxTriangle.UseVisualStyleBackColor = true;
+            // 
             // SettingsForm
             // 
             this.AcceptButton = this.buttonSaveSettings;
@@ -286,17 +283,17 @@ namespace MyGame.Forms
             this.ResumeLayout(false);
         }
 
+        private System.Windows.Forms.CheckBox checkBoxTriangle;
+
+        private System.Windows.Forms.CheckBox checkBoxSquare;
+
+        private System.Windows.Forms.CheckBox checkBoxCircle;
+
         private System.Windows.Forms.CheckBox checkboxRed;
         private System.Windows.Forms.CheckBox checkboxGreen;
         private System.Windows.Forms.CheckBox checkboxBlue;
 
         private System.Windows.Forms.GroupBox groupBox1;
-
-        private System.Windows.Forms.RadioButton radiobuttonTriangle;
-
-        private System.Windows.Forms.RadioButton radiobuttonCircle;
-
-        private System.Windows.Forms.RadioButton radiobuttonSquare;
 
         private System.Windows.Forms.Label labelWidth;
 
