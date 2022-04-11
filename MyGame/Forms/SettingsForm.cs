@@ -17,29 +17,34 @@ namespace MyGame.Forms
             checkboxGreen.Checked = (bool) settings["Green"];
             checkboxBlue.Checked = (bool) settings["Blue"];
 
-            if (radiobuttonCustom.Checked)
-            {
-                // TODO: Save custom dimensions
-            }
+            textboxLength.Text = settings["CustomX"].ToString();
+            textboxWidth.Text = settings["CustomY"].ToString();
         }
 
         private void radiobuttonCustom_CheckedChanged(object sender, EventArgs e)
         {
             groupboxCustomSize.Enabled = radiobuttonCustom.Checked;
-
-            if (groupboxCustomSize.Enabled) return;
-            
-            textboxLength.Text = "";
-            textboxWidth.Text = "";
         }
 
         private void buttonCancelSettings_Click(object sender, EventArgs e)
         {
-            Hide();
+            Close();
         }
 
         private void buttonSaveSettings_Click(object sender, EventArgs e)
         {
+            if (!checkBoxCircle.Checked && !checkBoxSquare.Checked && !checkBoxTriangle.Checked)
+            {
+                MessageBox.Show("Choose at least one shape.");
+                return;
+            }
+
+            if (!checkboxRed.Checked && !checkboxGreen.Checked && !checkboxBlue.Checked)
+            {
+                MessageBox.Show("Choose at least one color.");
+                return;
+            }
+            
             Properties.Settings.Default["Difficulty"] = GetMarkedDifficulty();
             Properties.Settings.Default["Circle"] = checkBoxCircle.Checked;
             Properties.Settings.Default["Square"] = checkBoxSquare.Checked;
@@ -47,8 +52,10 @@ namespace MyGame.Forms
             Properties.Settings.Default["Red"] = checkboxRed.Checked;
             Properties.Settings.Default["Green"] = checkboxGreen.Checked;
             Properties.Settings.Default["Blue"] = checkboxBlue.Checked;
+            Properties.Settings.Default["CustomX"] = int.Parse(textboxLength.Text);
+            Properties.Settings.Default["CustomY"] = int.Parse(textboxWidth.Text);
             Properties.Settings.Default.Save();
-            Hide();
+            Close();
         }
 
         private int GetMarkedDifficulty()

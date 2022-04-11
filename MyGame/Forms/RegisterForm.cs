@@ -28,7 +28,7 @@ namespace MyGame.Forms
                 Email = textBoxEmail.Text,
             };
             
-            Engine.SaveUser(user);
+            Engine.AddUser(user);
             CleanRegisterForm();
         }
 
@@ -39,7 +39,7 @@ namespace MyGame.Forms
 
         private bool IsUsernameValid()
         {
-            List<User> userList = Engine.ReadUsersXml();
+            List<User> userList = Engine.ReadUsersJson();
             return userList.All(user => user.Username != textBoxUsername.Text);
         }
 

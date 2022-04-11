@@ -51,6 +51,7 @@ namespace MyGame.Forms
             this.checkboxBlue = new System.Windows.Forms.CheckBox();
             this.checkboxGreen = new System.Windows.Forms.CheckBox();
             this.checkboxRed = new System.Windows.Forms.CheckBox();
+            this.labelWarning = new System.Windows.Forms.Label();
             this.groupboxDifficulty.SuspendLayout();
             this.groupboxCustomSize.SuspendLayout();
             this.groupboxShape.SuspendLayout();
@@ -259,6 +260,14 @@ namespace MyGame.Forms
             this.checkboxRed.Text = "Red";
             this.checkboxRed.UseVisualStyleBackColor = true;
             // 
+            // labelWarning
+            // 
+            this.labelWarning.Location = new System.Drawing.Point(95, 385);
+            this.labelWarning.Name = "labelWarning";
+            this.labelWarning.Size = new System.Drawing.Size(406, 37);
+            this.labelWarning.TabIndex = 4;
+            this.labelWarning.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // SettingsForm
             // 
             this.AcceptButton = this.buttonSaveSettings;
@@ -266,6 +275,7 @@ namespace MyGame.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancelSettings;
             this.ClientSize = new System.Drawing.Size(628, 506);
+            this.Controls.Add(this.labelWarning);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonCancelSettings);
             this.Controls.Add(this.buttonSaveSettings);
@@ -282,6 +292,8 @@ namespace MyGame.Forms
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Label labelWarning;
 
         private System.Windows.Forms.CheckBox checkBoxTriangle;
 

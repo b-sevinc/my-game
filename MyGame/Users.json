@@ -1,0 +1,35 @@
+[
+  {
+    "Username": "admin",
+    "Password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
+    "FullName": "john doe",
+    "PhoneNumber": "123456789",
+    "City": "nice",
+    "Country": "france",
+    "Email": "admin@admin.com",
+    "Address": "somewhere in northern france",
+    "UserType": 9
+  },
+  {
+    "Username": "user",
+    "Password": "04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb",
+    "FullName": "jane doe",
+    "PhoneNumber": "987654",
+    "City": "madrid",
+    "Country": "spain",
+    "Email": "",
+    "Address": "no ty",
+    "UserType": 0
+  },
+  {
+    "Username": "ouid",
+    "Password": "c35fa625d91f9622f025ea38c925070eeff69f0b972700698fd6ad7d30d96628",
+    "FullName": "ouidius",
+    "PhoneNumber": "5543831751",
+    "City": "symrna",
+    "Country": "greece",
+    "Email": "ovid19@gmail.com",
+    "Address": "idk",
+    "UserType": 0
+  }
+]

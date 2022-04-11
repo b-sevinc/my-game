@@ -106,5 +106,29 @@ namespace MyGame.Properties {
                 this["Triangle"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int CustomX {
+            get {
+                return ((int)(this["CustomX"]));
+            }
+            set {
+                this["CustomX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int CustomY {
+            get {
+                return ((int)(this["CustomY"]));
+            }
+            set {
+                this["CustomY"] = value;
+            }
+        }
     }
 }

@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Xml.Serialization;
 
 namespace MyGame.Game
 {
@@ -11,66 +10,69 @@ namespace MyGame.Game
     {
         private static Engine _instance;
         private static List<User> _userList;
-        private const string Filepath = "../../Users.xml";        
+        private const string FilepathJson = "../../Users.json";
         public static User CurrentUser { get; set; }
         public static Engine Instance => _instance ?? (_instance = new Engine());
-        private static XmlSerializer _serializer = new XmlSerializer(typeof(List<User>));
 
         private Engine()
         {
-            CreateUsersXml();
+            CreateUsersJson();
         }
-        
-        private static void CreateUsersXml()
-        {
-            if (File.Exists(Filepath)) return;
-            
-            _userList = new List<User>();
-            _userList.Add(new User() {Username = "user", Password = ToSha256("user"), UserType = 0});  // pre-registered
-            _userList.Add(new User() {Username = "admin", Password = ToSha256("admin"), UserType = 9});  // pre-registered
-            UpdateUserList(_userList);
-        }
-        
-        public static List<User> ReadUsersXml()
-        {
-            using (var fs = new FileStream(Filepath, FileMode.Open, FileAccess.Read))
-            {
-                _userList = _serializer.Deserialize(fs) as List<User>;
-            }
 
+        private static void CreateUsersJson()
+        {
+            if (File.Exists(FilepathJson)) return;
+            
+            _userList = new List<User>  // pre-registered users
+            {
+                new User {Username = "user", Password = ToSha256("user"), UserType = 0},
+                new User {Username = "admin", Password = ToSha256("admin"), UserType = 9},
+            };
+            
+            UpdateUserList();
+        }
+
+        public static List<User> ReadUsersJson()
+        {
+            _userList = DataSerializer.JsonDeserialize(FilepathJson) as List<User>;
             return _userList;
         }
 
-        public static void SaveUser(User user)
+        public static void AddUser(User user)
         {
             _userList.Add(user);
-            UpdateUserList(_userList);
+            UpdateUserList();
         }
 
         public static void UpdateUser(User newUser)
         {
             if (_userList.All(x => x.Username != newUser.Username)) return;
 
-            User user = _userList.Find(x => x.Username == newUser.Username);
+            var user = _userList.Find(x => x.Username == newUser.Username);
 
             _userList[_userList.IndexOf(user)] = newUser;
 
-            UpdateUserList(_userList);
+            UpdateUserList();
         }
         
-        public static void UpdateUserList(List<User> userList)
+        public static void RemoveUser(User targetUser)
         {
-            using (var fs = new FileStream(Filepath, FileMode.Open, FileAccess.Write))
-            {
-                _serializer.Serialize(fs, userList);
-            }
+            if (_userList.All(x => x.Username != targetUser.Username)) return;
+            var user = _userList.Find(x => x.Username == targetUser.Username);
+            _userList.Remove(user);
+            UpdateUserList();
         }
-        
+
+        public static void UpdateUserList()
+        {
+            DataSerializer.JsonSerialize(_userList, FilepathJson);
+        }
+
         public static string ToSha256(string s)
         {
             using (var sha256 = SHA256.Create())
             {
-                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(s));
+                var bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(s));
                 var sb = new StringBuilder();
                 foreach (var t in bytes)
                 {
