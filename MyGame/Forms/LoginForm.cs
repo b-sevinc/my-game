@@ -8,14 +8,14 @@ namespace MyGame.Forms
 {
     public partial class LoginForm : Form
     {
-        private List<User> _userList = Engine.ReadUsersXml();
+        private List<User> _userList = Engine.ReadUsersJson();
         
         public LoginForm()
         {
             InitializeComponent();
         }
 
-        private void UserLogin(User user)
+        private static void UserLogin(User user)
         {
             Engine.CurrentUser = user;
             var gameForm = new GameForm();
@@ -24,7 +24,7 @@ namespace MyGame.Forms
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            _userList = Engine.ReadUsersXml();
+            _userList = Engine.ReadUsersJson();
             if (_userList.All(user => user.Username != usernameTextbox.Text || 
                                       user.Password != Engine.ToSha256(passwordTextbox.Text)))
             {
@@ -36,13 +36,13 @@ namespace MyGame.Forms
             Hide();
         }
 
-        private void usernameTextbox_Enter(object sender, EventArgs e)
+        private void usernameTextBox_Enter(object sender, EventArgs e)
         {
             usernameTextbox.SelectAll();
             usernameTextbox.Focus();
         }
 
-        private void passwordTextbox_Enter(object sender, EventArgs e)
+        private void passwordTextBox_Enter(object sender, EventArgs e)
         {
             passwordTextbox.SelectAll();
             passwordTextbox.Focus();
@@ -56,7 +56,7 @@ namespace MyGame.Forms
         private void buttonRegister_Click(object sender, EventArgs e)
         {
             if (Application.OpenForms.OfType<RegisterForm>().Any()) return;
-            RegisterForm registerForm = new RegisterForm();
+            var registerForm = new RegisterForm();
             registerForm.Show();
         }
     }

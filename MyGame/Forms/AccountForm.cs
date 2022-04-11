@@ -13,14 +13,15 @@ namespace MyGame.Forms
 
         private void AccountForm_Load(object sender, EventArgs e)
         {
-            User currentUser = Engine.CurrentUser;
-            textBoxUsername.Text = currentUser.Username;
-            textBoxFullname.Text = currentUser.FullName;
-            textBoxPhoneNumber.Text = currentUser.PhoneNumber;
-            textBoxAddress.Text = currentUser.Address;
-            textBoxCity.Text = currentUser.City;
-            textBoxCountry.Text = currentUser.Country;
-            textBoxEmail.Text = currentUser.Email;
+            var user = Engine.CurrentUser;
+            
+            textBoxUsername.Text = user.Username;
+            textBoxFullname.Text = user.FullName;
+            textBoxPhoneNumber.Text = user.PhoneNumber;
+            textBoxAddress.Text = user.Address;
+            textBoxCity.Text = user.City;
+            textBoxCountry.Text = user.Country;
+            textBoxEmail.Text = user.Email;
         }
 
         private void buttonConfirm_Click(object sender, EventArgs e)
@@ -30,23 +31,24 @@ namespace MyGame.Forms
                 MessageBox.Show("Wrong password.");
                 return;
             }
+
+            var user = Engine.CurrentUser;
             
-            User currentUser = Engine.CurrentUser;
-            currentUser.Address = textBoxAddress.Text;
-            currentUser.City = textBoxCity.Text;
-            currentUser.Country = textBoxCountry.Text;
-            currentUser.Email = textBoxEmail.Text;
-            currentUser.PhoneNumber = textBoxPhoneNumber.Text;
-            currentUser.FullName = textBoxFullname.Text;
+            user.Address = textBoxAddress.Text;
+            user.City = textBoxCity.Text;
+            user.Country = textBoxCountry.Text;
+            user.Email = textBoxEmail.Text;
+            user.PhoneNumber = textBoxPhoneNumber.Text;
+            user.FullName = textBoxFullname.Text;
             
             if (textBoxPassword.Text == textBoxPassword2.Text && textBoxPassword.Text != "" && textBoxPassword2.Text != "")
             {
-                currentUser.Password = Engine.ToSha256(textBoxPassword.Text);
+                user.Password = Engine.ToSha256(textBoxPassword.Text);
             }
             
-            Engine.UpdateUser(currentUser);
+            Engine.UpdateUser(user);
             Close();
-            MessageBox.Show("Succesfully edited account information.");
+            MessageBox.Show("Successfully edited account information.");
         }
     }
 }
