@@ -42,15 +42,15 @@ namespace MyGame.Forms
             this.radioButtonNormal = new System.Windows.Forms.RadioButton();
             this.radiobuttonEasy = new System.Windows.Forms.RadioButton();
             this.groupboxShape = new System.Windows.Forms.GroupBox();
+            this.checkBoxTriangle = new System.Windows.Forms.CheckBox();
+            this.checkBoxSquare = new System.Windows.Forms.CheckBox();
+            this.checkBoxCircle = new System.Windows.Forms.CheckBox();
             this.buttonSaveSettings = new System.Windows.Forms.Button();
             this.buttonCancelSettings = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkboxBlue = new System.Windows.Forms.CheckBox();
             this.checkboxGreen = new System.Windows.Forms.CheckBox();
             this.checkboxRed = new System.Windows.Forms.CheckBox();
-            this.checkBoxCircle = new System.Windows.Forms.CheckBox();
-            this.checkBoxSquare = new System.Windows.Forms.CheckBox();
-            this.checkBoxTriangle = new System.Windows.Forms.CheckBox();
             this.groupboxDifficulty.SuspendLayout();
             this.groupboxCustomSize.SuspendLayout();
             this.groupboxShape.SuspendLayout();
@@ -172,6 +172,33 @@ namespace MyGame.Forms
             this.groupboxShape.TabStop = false;
             this.groupboxShape.Text = "Shape";
             // 
+            // checkBoxTriangle
+            // 
+            this.checkBoxTriangle.Location = new System.Drawing.Point(386, 41);
+            this.checkBoxTriangle.Name = "checkBoxTriangle";
+            this.checkBoxTriangle.Size = new System.Drawing.Size(110, 42);
+            this.checkBoxTriangle.TabIndex = 6;
+            this.checkBoxTriangle.Text = "Triangle ▲";
+            this.checkBoxTriangle.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxSquare
+            // 
+            this.checkBoxSquare.Location = new System.Drawing.Point(231, 41);
+            this.checkBoxSquare.Name = "checkBoxSquare";
+            this.checkBoxSquare.Size = new System.Drawing.Size(110, 42);
+            this.checkBoxSquare.TabIndex = 5;
+            this.checkBoxSquare.Text = "Square ■";
+            this.checkBoxSquare.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxCircle
+            // 
+            this.checkBoxCircle.Location = new System.Drawing.Point(96, 41);
+            this.checkBoxCircle.Name = "checkBoxCircle";
+            this.checkBoxCircle.Size = new System.Drawing.Size(110, 42);
+            this.checkBoxCircle.TabIndex = 6;
+            this.checkBoxCircle.Text = "Circle ●";
+            this.checkBoxCircle.UseVisualStyleBackColor = true;
+            // 
             // buttonSaveSettings
             // 
             this.buttonSaveSettings.Location = new System.Drawing.Point(95, 435);
@@ -231,33 +258,6 @@ namespace MyGame.Forms
             this.checkboxRed.TabIndex = 3;
             this.checkboxRed.Text = "Red";
             this.checkboxRed.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxCircle
-            // 
-            this.checkBoxCircle.Location = new System.Drawing.Point(96, 41);
-            this.checkBoxCircle.Name = "checkBoxCircle";
-            this.checkBoxCircle.Size = new System.Drawing.Size(110, 42);
-            this.checkBoxCircle.TabIndex = 6;
-            this.checkBoxCircle.Text = "Circle ●";
-            this.checkBoxCircle.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxSquare
-            // 
-            this.checkBoxSquare.Location = new System.Drawing.Point(231, 41);
-            this.checkBoxSquare.Name = "checkBoxSquare";
-            this.checkBoxSquare.Size = new System.Drawing.Size(110, 42);
-            this.checkBoxSquare.TabIndex = 5;
-            this.checkBoxSquare.Text = "Square ■";
-            this.checkBoxSquare.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxTriangle
-            // 
-            this.checkBoxTriangle.Location = new System.Drawing.Point(386, 41);
-            this.checkBoxTriangle.Name = "checkBoxTriangle";
-            this.checkBoxTriangle.Size = new System.Drawing.Size(110, 42);
-            this.checkBoxTriangle.TabIndex = 6;
-            this.checkBoxTriangle.Text = "Triangle ▲";
-            this.checkBoxTriangle.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
