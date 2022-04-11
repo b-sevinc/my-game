@@ -1,28 +1,39 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
+using MyGame.Game;
 
 namespace MyGame.Forms
 {
     public partial class LoginForm : Form
     {
+        private List<User> _userList = Engine.ReadUsersXml();
+        
         public LoginForm()
         {
             InitializeComponent();
         }
 
+        private void UserLogin(User user)
+        {
+            Engine.CurrentUser = user;
+            var gameForm = new GameForm();
+            gameForm.Show();
+        }
+
         private void loginButton_Click(object sender, EventArgs e)
         {
-            if (usernameTextbox.Text == "admin" && passwordTextbox.Text == "admin" 
-                || usernameTextbox.Text == "user" && passwordTextbox.Text == "user")
-            {
-                Hide();
-                GameForm gameForm = new GameForm();
-                gameForm.Show();
-            }
-            else
+            _userList = Engine.ReadUsersXml();
+            if (_userList.All(user => user.Username != usernameTextbox.Text || 
+                                      user.Password != Engine.ToSha256(passwordTextbox.Text)))
             {
                 MessageBox.Show("Invalid username or password.");
+                return;
             }
+
+            UserLogin(_userList.Find(user => user.Username == usernameTextbox.Text && user.Password == Engine.ToSha256(passwordTextbox.Text)));
+            Hide();
         }
 
         private void usernameTextbox_Enter(object sender, EventArgs e)
@@ -35,6 +46,18 @@ namespace MyGame.Forms
         {
             passwordTextbox.SelectAll();
             passwordTextbox.Focus();
+        }
+
+        private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void buttonRegister_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms.OfType<RegisterForm>().Any()) return;
+            RegisterForm registerForm = new RegisterForm();
+            registerForm.Show();
         }
     }
 }

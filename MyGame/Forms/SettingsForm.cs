@@ -55,31 +55,31 @@ namespace MyGame.Forms
         {
             if (radiobuttonEasy.Checked)
             {
-                return 0;
+                return (int)Enums.Difficulty.Easy;
             }
             if (radioButtonNormal.Checked)
             {
-                return 1;
+                return (int)Enums.Difficulty.Normal;
             }
             if (radiobuttonHard.Checked)
             {
-                return 2;
+                return (int)Enums.Difficulty.Hard;
             }
 
-            return 9;
+            return (int)Enums.Difficulty.Custom;
         }
 
         private void SetMarkedDifficulty(int diff)
         {
             switch (diff)
             {
-                case 0:
+                case (int)Enums.Difficulty.Easy:
                     radiobuttonEasy.Checked = true;
                     break;
-                case 1:
+                case (int)Enums.Difficulty.Normal:
                     radioButtonNormal.Checked = true;
                     break;
-                case 2:
+                case (int)Enums.Difficulty.Hard:
                     radiobuttonHard.Checked = true;
                     break;
                 default:
