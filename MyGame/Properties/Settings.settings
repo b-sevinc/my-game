@@ -6,13 +6,13 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="Circle" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="Red" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="Green" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="Blue" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -23,10 +23,10 @@
     <Setting Name="Triangle" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="CustomX" Type="System.Int32" Scope="User">
+    <Setting Name="GridX" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
-    <Setting Name="CustomY" Type="System.Int32" Scope="User">
+    <Setting Name="GridY" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
   </Settings>

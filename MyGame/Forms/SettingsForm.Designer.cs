@@ -140,6 +140,7 @@ namespace MyGame.Forms
             this.radiobuttonHard.TabStop = true;
             this.radiobuttonHard.Text = "Hard";
             this.radiobuttonHard.UseVisualStyleBackColor = true;
+            this.radiobuttonHard.CheckedChanged += new System.EventHandler(this.radiobuttonHard_CheckedChanged);
             // 
             // radioButtonNormal
             // 
@@ -150,6 +151,7 @@ namespace MyGame.Forms
             this.radioButtonNormal.TabStop = true;
             this.radioButtonNormal.Text = "Normal";
             this.radioButtonNormal.UseVisualStyleBackColor = true;
+            this.radioButtonNormal.CheckedChanged += new System.EventHandler(this.radioButtonNormal_CheckedChanged);
             // 
             // radiobuttonEasy
             // 
@@ -160,6 +162,7 @@ namespace MyGame.Forms
             this.radiobuttonEasy.TabStop = true;
             this.radiobuttonEasy.Text = "Easy";
             this.radiobuttonEasy.UseVisualStyleBackColor = true;
+            this.radiobuttonEasy.CheckedChanged += new System.EventHandler(this.radiobuttonEasy_CheckedChanged);
             // 
             // groupboxShape
             // 

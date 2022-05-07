@@ -3,6 +3,8 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Windows.Forms;
+using MyGame.Forms;
 
 namespace MyGame.Game
 {
@@ -87,6 +89,13 @@ namespace MyGame.Game
             if (CurrentUser is null) return false;
             
             return CurrentUser.Password == ToSha256(s);
+        }
+
+        public static void RestartGame()
+        {
+            Application.OpenForms.OfType<GameForm>().First().Close();
+            var gameForm = new GameForm();
+            gameForm.Show();
         }
     }
 }
