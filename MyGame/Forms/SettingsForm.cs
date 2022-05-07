@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
+using MyGame.Game;
 
 namespace MyGame.Forms
 {
@@ -17,8 +19,8 @@ namespace MyGame.Forms
             checkboxGreen.Checked = (bool) settings["Green"];
             checkboxBlue.Checked = (bool) settings["Blue"];
 
-            textboxLength.Text = settings["CustomX"].ToString();
-            textboxWidth.Text = settings["CustomY"].ToString();
+            textboxLength.Text = settings["GridX"].ToString();
+            textboxWidth.Text = settings["GridY"].ToString();
         }
 
         private void radiobuttonCustom_CheckedChanged(object sender, EventArgs e)
@@ -33,15 +35,38 @@ namespace MyGame.Forms
 
         private void buttonSaveSettings_Click(object sender, EventArgs e)
         {
-            if (!checkBoxCircle.Checked && !checkBoxSquare.Checked && !checkBoxTriangle.Checked)
+            int shapeCount = 0;
+            shapeCount += checkBoxCircle.Checked ? 1 : 0;
+            shapeCount += checkBoxSquare.Checked ? 1 : 0;
+            shapeCount += checkBoxTriangle.Checked ? 1 : 0;
+            if (shapeCount < 1)
             {
                 MessageBox.Show("Choose at least one shape.");
                 return;
             }
 
-            if (!checkboxRed.Checked && !checkboxGreen.Checked && !checkboxBlue.Checked)
+            int colorCount = 0;
+            colorCount += checkboxRed.Checked ? 1 : 0;
+            colorCount += checkboxGreen.Checked ? 1 : 0;
+            colorCount += checkboxBlue.Checked ? 1 : 0;
+            if (colorCount < 1)
             {
                 MessageBox.Show("Choose at least one color.");
+                return;
+            }
+
+            if (colorCount * shapeCount <= 1)
+            {
+                MessageBox.Show("Choose at least one multiple color or shape.");
+                return;
+            }
+
+            int gridX = int.Parse(textboxLength.Text);
+            int gridY = int.Parse(textboxWidth.Text);
+
+            if (gridX < 5 || gridY < 5 || gridX > 19 || gridY > 19)
+            {
+                MessageBox.Show("Grid sizes should be 5-19.");
                 return;
             }
             
@@ -52,10 +77,11 @@ namespace MyGame.Forms
             Properties.Settings.Default["Red"] = checkboxRed.Checked;
             Properties.Settings.Default["Green"] = checkboxGreen.Checked;
             Properties.Settings.Default["Blue"] = checkboxBlue.Checked;
-            Properties.Settings.Default["CustomX"] = int.Parse(textboxLength.Text);
-            Properties.Settings.Default["CustomY"] = int.Parse(textboxWidth.Text);
+            Properties.Settings.Default["GridX"] = gridX;
+            Properties.Settings.Default["GridY"] = gridY;
             Properties.Settings.Default.Save();
             Close();
+            Engine.RestartGame();
         }
 
         private int GetMarkedDifficulty()
@@ -93,6 +119,24 @@ namespace MyGame.Forms
                     radiobuttonCustom.Checked = true;
                     break;
             }
+        }
+
+        private void radiobuttonEasy_CheckedChanged(object sender, EventArgs e)
+        {
+            textboxLength.Text = "15";
+            textboxWidth.Text = "15";
+        }
+
+        private void radioButtonNormal_CheckedChanged(object sender, EventArgs e)
+        {
+            textboxLength.Text = "9";
+            textboxWidth.Text = "9";
+        }
+
+        private void radiobuttonHard_CheckedChanged(object sender, EventArgs e)
+        {
+            textboxLength.Text = "6";
+            textboxWidth.Text = "6";
         }
     }
 }

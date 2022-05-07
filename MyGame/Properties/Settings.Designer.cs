@@ -37,7 +37,7 @@ namespace MyGame.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool Circle {
             get {
                 return ((bool)(this["Circle"]));
@@ -49,7 +49,7 @@ namespace MyGame.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool Red {
             get {
                 return ((bool)(this["Red"]));
@@ -61,7 +61,7 @@ namespace MyGame.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool Green {
             get {
                 return ((bool)(this["Green"]));
@@ -110,24 +110,24 @@ namespace MyGame.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("5")]
-        public int CustomX {
+        public int GridX {
             get {
-                return ((int)(this["CustomX"]));
+                return ((int)(this["GridX"]));
             }
             set {
-                this["CustomX"] = value;
+                this["GridX"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("5")]
-        public int CustomY {
+        public int GridY {
             get {
-                return ((int)(this["CustomY"]));
+                return ((int)(this["GridY"]));
             }
             set {
-                this["CustomY"] = value;
+                this["GridY"] = value;
             }
         }
     }

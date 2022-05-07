@@ -45,13 +45,13 @@ namespace MyGame.Forms
 
         private void textBoxUsername_TextChanged(object sender, EventArgs e)
         {
-            CanRegister();
+            CheckRegister();
             labelWarning.Text = !IsUsernameValid() ? "Name already in use" : "";
         }
 
         private void textBoxPassword_TextChanged(object sender, EventArgs e)
         {
-            CanRegister();
+            CheckRegister();
             labelWarning.Text = !IsPasswordValid() ? "Passwords do not match" : "";
         }
         
@@ -60,7 +60,7 @@ namespace MyGame.Forms
             textBoxPassword_TextChanged(sender, e);
         }
 
-        private void CanRegister()
+        private void CheckRegister()
         {
             buttonRegister.Enabled = !(textBoxUsername.Text == ""
                                        || textBoxPassword.Text == "" 
@@ -80,7 +80,7 @@ namespace MyGame.Forms
             textBoxCity.Text = "";
             textBoxCountry.Text = "";
             textBoxEmail.Text = "";
-            CanRegister();
+            CheckRegister();
         }
 
         private void textBoxPhoneNo_KeyPress(object sender, KeyPressEventArgs e)
@@ -89,12 +89,6 @@ namespace MyGame.Forms
             {
                 e.Handled = true;
             }
-        }
-
-        private void RegisterForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Hide();
-            e.Cancel = true;
         }
     }
 }

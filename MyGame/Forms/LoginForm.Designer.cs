@@ -120,7 +120,6 @@
         private System.Windows.Forms.Label passwordLabel;
 
         private System.Windows.Forms.TextBox passwordTextbox;
-        private System.Windows.Forms.Button Login;
 
         private System.Windows.Forms.TextBox usernameTextbox;
 

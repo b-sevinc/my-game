@@ -241,7 +241,7 @@ namespace MyGame.Forms
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "RegisterForm";
             this.Text = "RegisterForm";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RegisterForm_FormClosing);
+            this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
         }
