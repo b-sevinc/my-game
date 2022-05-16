@@ -13,7 +13,6 @@ namespace MyGame
         [STAThread]
         static void Main()
         {
-            var engine = Engine.Instance;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LoginForm());

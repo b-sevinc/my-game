@@ -86,6 +86,7 @@ namespace MyGame.Forms
             this.MaximizeBox = false;
             this.Name = "GameForm";
             this.Text = "MyGame";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GameForm_FormClosed);
             this.Load += new System.EventHandler(this.GameForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

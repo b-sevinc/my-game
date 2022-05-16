@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Forms;
 using MyGame.Game;
 
@@ -81,7 +80,7 @@ namespace MyGame.Forms
             Properties.Settings.Default["GridY"] = gridY;
             Properties.Settings.Default.Save();
             Close();
-            Engine.RestartGame();
+            Engine.EndGame(true);
         }
 
         private int GetMarkedDifficulty()

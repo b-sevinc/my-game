@@ -46,7 +46,7 @@ namespace MyGame.Forms
                 user.Password = Engine.ToSha256(textBoxPassword.Text);
             }
             
-            Engine.UpdateUser(user);
+            SqliteDataAccess.UpdateUser(user);
             Close();
             MessageBox.Show("Successfully edited account information.");
         }

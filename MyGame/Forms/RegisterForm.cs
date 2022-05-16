@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using MyGame.Game;
@@ -15,7 +14,7 @@ namespace MyGame.Forms
 
         private void buttonRegister_Click(object sender, EventArgs e)
         {
-            User user = new User
+            var user = new User
             {
                 Username = textBoxUsername.Text,
                 Password = Engine.ToSha256(textBoxPassword.Text),
@@ -28,8 +27,8 @@ namespace MyGame.Forms
                 Email = textBoxEmail.Text,
             };
             
-            Engine.AddUser(user);
-            CleanRegisterForm();
+            SqliteDataAccess.SaveUser(user);
+            Close();
         }
 
         private bool IsPasswordValid()
@@ -39,20 +38,20 @@ namespace MyGame.Forms
 
         private bool IsUsernameValid()
         {
-            List<User> userList = Engine.ReadUsersJson();
+            var userList = SqliteDataAccess.LoadUsers();
             return userList.All(user => user.Username != textBoxUsername.Text);
         }
 
         private void textBoxUsername_TextChanged(object sender, EventArgs e)
         {
             CheckRegister();
-            labelWarning.Text = !IsUsernameValid() ? "Name already in use" : "";
+            labelWarning.Text = !IsUsernameValid() ? "Name already in use" : null;
         }
 
         private void textBoxPassword_TextChanged(object sender, EventArgs e)
         {
             CheckRegister();
-            labelWarning.Text = !IsPasswordValid() ? "Passwords do not match" : "";
+            labelWarning.Text = !IsPasswordValid() ? "Passwords do not match" : null;
         }
         
         private void textBoxPassword2_TextChanged(object sender, EventArgs e)
@@ -62,25 +61,11 @@ namespace MyGame.Forms
 
         private void CheckRegister()
         {
-            buttonRegister.Enabled = !(textBoxUsername.Text == ""
-                                       || textBoxPassword.Text == "" 
-                                       || textBoxPassword2.Text == "" 
+            buttonRegister.Enabled = !(textBoxUsername.Text is null
+                                       || textBoxPassword.Text is null 
+                                       || textBoxPassword2.Text is null 
                                        || !IsPasswordValid()
                                        || !IsUsernameValid());
-        }
-
-        private void CleanRegisterForm()
-        {
-            textBoxUsername.Text = "";
-            textBoxPassword.Text = "";
-            textBoxPassword2.Text = "";
-            textBoxFullname.Text = "";
-            textBoxAddress.Text = "";
-            textBoxPhoneNo.Text = "";
-            textBoxCity.Text = "";
-            textBoxCountry.Text = "";
-            textBoxEmail.Text = "";
-            CheckRegister();
         }
 
         private void textBoxPhoneNo_KeyPress(object sender, KeyPressEventArgs e)
