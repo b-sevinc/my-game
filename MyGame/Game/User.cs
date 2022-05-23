@@ -14,5 +14,6 @@ namespace MyGame.Game
         public string Email { get; set; } = "";
         public string Address { get; set; } = "";
         public int UserType { get; set; } = (int)Enums.UserType.User;
+        public int HighestScore { get; set; }
     }
 }

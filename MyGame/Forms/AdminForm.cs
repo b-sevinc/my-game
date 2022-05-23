@@ -8,18 +8,22 @@ namespace MyGame.Forms
 {
     public partial class AdminForm : Form
     {
-        private List<User> _userList = Engine.ReadUsersJson();
+        private List<User> _userList = SqliteDataAccess.LoadUsers();
         public AdminForm()
         {
             InitializeComponent();
             RefreshForm();
             if (dataGridView1.Columns["Username"] is null) return;
+            if (dataGridView1.Columns["Password"] is null) return;
+            if (dataGridView1.Columns["HighestScore"] is null) return;
             dataGridView1.Columns["Username"].ReadOnly = true;
+            dataGridView1.Columns["Password"].ReadOnly = true;
+            dataGridView1.Columns["HighestScore"].ReadOnly = true;
         }
 
         private void RefreshForm()
         {
-            _userList = Engine.ReadUsersJson();
+            _userList = SqliteDataAccess.LoadUsers();
             dataGridView1.DataSource = _userList;
         }
 
@@ -31,8 +35,14 @@ namespace MyGame.Forms
         private void buttonConfirm_Click(object sender, EventArgs e)
         {
             if (Engine.CurrentUser.UserType != (int)Enums.UserType.Admin) return;
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                var user = _userList[row.Index];
+                if (_userList.All(x => x.Username != user.Username)) return;
+                SqliteDataAccess.UpdateUser(user);
+            }
             
-            Engine.UpdateUserList();
             RefreshForm();
             MessageBox.Show("Successfully edited user info.");
         }
@@ -51,12 +61,28 @@ namespace MyGame.Forms
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 0) return;
+            if (dataGridView1.SelectedRows.Count != 1)
+            {
+                MessageBox.Show("Please select one user to delete.");
+                return;
+            }
+            
+            var result = MessageBox.Show("Are you sure to delete user(s)?", "Warning",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.No) return;
             
             foreach (DataGridViewRow selectedRow in dataGridView1.SelectedRows)
             {
                 var user = _userList[selectedRow.Index];
+                if (user.Username == Engine.CurrentUser.Username)
+                {
+                    MessageBox.Show("You cannot delete your own account.");
+                    return;
+                }
                 if (_userList.All(x => x.Username != user.Username)) return;
-                Engine.RemoveUser(user);
+                SqliteDataAccess.RemoveUser(user);
             }
             
             RefreshForm();

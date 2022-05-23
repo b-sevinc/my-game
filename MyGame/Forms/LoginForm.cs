@@ -8,7 +8,7 @@ namespace MyGame.Forms
 {
     public partial class LoginForm : Form
     {
-        private List<User> _userList = Engine.ReadUsersJson();
+        private List<User> _userList = SqliteDataAccess.LoadUsers();
         
         public LoginForm()
         {
@@ -24,7 +24,7 @@ namespace MyGame.Forms
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            _userList = Engine.ReadUsersJson();
+            _userList = SqliteDataAccess.LoadUsers();
             if (_userList.All(user => user.Username != usernameTextbox.Text || 
                                       user.Password != Engine.ToSha256(passwordTextbox.Text)))
             {
