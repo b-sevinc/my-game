@@ -29,22 +29,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.usernameTextbox = new System.Windows.Forms.TextBox();
             this.passwordTextbox = new System.Windows.Forms.TextBox();
             this.loginButton = new System.Windows.Forms.Button();
             this.usernameLabel = new System.Windows.Forms.Label();
             this.passwordLabel = new System.Windows.Forms.Label();
             this.buttonRegister = new System.Windows.Forms.Button();
+            this.usernameMaskedTextbox = new System.Windows.Forms.MaskedTextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // usernameTextbox
-            // 
-            this.usernameTextbox.Location = new System.Drawing.Point(204, 66);
-            this.usernameTextbox.MaxLength = 20;
-            this.usernameTextbox.Name = "usernameTextbox";
-            this.usernameTextbox.Size = new System.Drawing.Size(204, 26);
-            this.usernameTextbox.TabIndex = 0;
-            this.usernameTextbox.Enter += new System.EventHandler(this.usernameTextBox_Enter);
             // 
             // passwordTextbox
             // 
@@ -92,18 +84,40 @@
             this.buttonRegister.UseVisualStyleBackColor = true;
             this.buttonRegister.Click += new System.EventHandler(this.buttonRegister_Click);
             // 
+            // usernameMaskedTextbox
+            // 
+            this.usernameMaskedTextbox.Location = new System.Drawing.Point(204, 63);
+            this.usernameMaskedTextbox.Mask = "L???????????";
+            this.usernameMaskedTextbox.Name = "usernameMaskedTextbox";
+            this.usernameMaskedTextbox.PromptChar = ' ';
+            this.usernameMaskedTextbox.Size = new System.Drawing.Size(203, 26);
+            this.usernameMaskedTextbox.TabIndex = 0;
+            this.usernameMaskedTextbox.Enter += new System.EventHandler(this.usernameMaskedTextbox_Enter);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.Control;
+            this.button1.Location = new System.Drawing.Point(414, 119);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(38, 38);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "👁";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.button1_MouseClick);
+            // 
             // LoginForm
             // 
             this.AcceptButton = this.loginButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(542, 345);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.usernameMaskedTextbox);
             this.Controls.Add(this.buttonRegister);
             this.Controls.Add(this.passwordLabel);
             this.Controls.Add(this.usernameLabel);
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.passwordTextbox);
-            this.Controls.Add(this.usernameTextbox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "LoginForm";
             this.Text = "Login";
@@ -111,6 +125,10 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Button button1;
+
+        private System.Windows.Forms.MaskedTextBox usernameMaskedTextbox;
 
         private System.Windows.Forms.Button buttonRegister;
 
@@ -120,8 +138,6 @@
         private System.Windows.Forms.Label passwordLabel;
 
         private System.Windows.Forms.TextBox passwordTextbox;
-
-        private System.Windows.Forms.TextBox usernameTextbox;
 
         #endregion
     }

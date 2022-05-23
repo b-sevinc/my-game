@@ -60,8 +60,8 @@ namespace MyGame.Forms
                 return;
             }
 
-            int gridX = int.Parse(textboxLength.Text);
-            int gridY = int.Parse(textboxWidth.Text);
+            var gridX = int.Parse(textboxLength.Text);
+            var gridY = int.Parse(textboxWidth.Text);
 
             if (gridX < 5 || gridY < 5 || gridX > 19 || gridY > 19)
             {
@@ -80,7 +80,7 @@ namespace MyGame.Forms
             Properties.Settings.Default["GridY"] = gridY;
             Properties.Settings.Default.Save();
             Close();
-            Engine.EndGame(true);
+            Engine.RestartGame();
         }
 
         private int GetMarkedDifficulty()

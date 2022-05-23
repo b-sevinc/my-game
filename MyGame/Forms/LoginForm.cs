@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using MyGame.Game;
+using MyGame.Properties;
 
 namespace MyGame.Forms
 {
@@ -13,6 +14,7 @@ namespace MyGame.Forms
         public LoginForm()
         {
             InitializeComponent();
+            usernameMaskedTextbox.Text = Settings.Default["LastUsername"].ToString();
         }
 
         private static void UserLogin(User user)
@@ -25,21 +27,18 @@ namespace MyGame.Forms
         private void loginButton_Click(object sender, EventArgs e)
         {
             _userList = SqliteDataAccess.LoadUsers();
-            if (_userList.All(user => user.Username != usernameTextbox.Text || 
+            if (_userList.All(user => user.Username != usernameMaskedTextbox.Text || 
                                       user.Password != Engine.ToSha256(passwordTextbox.Text)))
             {
                 MessageBox.Show("Invalid username or password.");
                 return;
             }
 
-            UserLogin(_userList.Find(user => user.Username == usernameTextbox.Text && user.Password == Engine.ToSha256(passwordTextbox.Text)));
+            var loggedInUser = _userList.Find(user =>
+                user.Username == usernameMaskedTextbox.Text && user.Password == Engine.ToSha256(passwordTextbox.Text));
+            UserLogin(loggedInUser);
+            Settings.Default["LastUsername"] = loggedInUser.Username;
             Hide();
-        }
-
-        private void usernameTextBox_Enter(object sender, EventArgs e)
-        {
-            usernameTextbox.SelectAll();
-            usernameTextbox.Focus();
         }
 
         private void passwordTextBox_Enter(object sender, EventArgs e)
@@ -58,6 +57,17 @@ namespace MyGame.Forms
             if (Application.OpenForms.OfType<RegisterForm>().Any()) return;
             var registerForm = new RegisterForm();
             registerForm.Show();
+        }
+
+        private void usernameMaskedTextbox_Enter(object sender, EventArgs e)
+        {
+            usernameMaskedTextbox.SelectAll();
+            usernameMaskedTextbox.Focus();
+        }
+
+        private void button1_MouseClick(object sender, MouseEventArgs e)
+        {
+            passwordTextbox.PasswordChar = passwordTextbox.PasswordChar == '*' ? '\0' : '*';
         }
     }
 }
