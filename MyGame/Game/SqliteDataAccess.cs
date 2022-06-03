@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace MyGame.Game
 {
-    public class SqliteDataAccess
+    public static class SqliteDataAccess
     {
         public static List<User> LoadUsers()
         {
@@ -42,10 +42,11 @@ namespace MyGame.Game
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 // TODO: clean this query
-                cnn.Execute("update user set Fullname='" + user.FullName + "', PhoneNumber='" + user.PhoneNumber 
-                            + "', City='" + user.City + "', Country='" + user.Country + "', Email='" + user.Email 
-                            + "', Address='" + user.Address + "', UserType='" + user.UserType + "', HighestScore='"
-                            + user.HighestScore+" where Username='" + user.Username + "'");
+                string sql = "update user set Fullname='" + user.FullName + "', PhoneNumber='" + user.PhoneNumber
+                             + "', City='" + user.City + "', Country='" + user.Country + "', Email='" + user.Email
+                             + "', Address='" + user.Address + "', UserType='" + user.UserType + "', HighestScore='"
+                             + user.HighestScore + "' where Username='" + user.Username + "'";
+                cnn.Execute(sql);
             }
         }
         

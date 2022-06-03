@@ -18,6 +18,7 @@ namespace MyGame.Game
         public static User CurrentUser { get; set; }
         public static Engine Instance => _instance ?? (_instance = new Engine());
         public static Label Score { get; set; }
+        public static readonly Cell[] NextTokenCells = new Cell[3];
 
         private static Cell _selectedCell;
         public static bool CanPlay = true;
@@ -27,6 +28,7 @@ namespace MyGame.Game
         public static int CellX = (int)Settings.Default["GridX"];
         public static int CellY = (int)Settings.Default["GridY"];
         private static int _score;
+        private static List<Token> _nextTokens = GenerateThreeToken();
 
         private Engine()
         {
@@ -52,27 +54,60 @@ namespace MyGame.Game
             return CurrentUser.Password == ToSha256(s);
         }
 
-        public static void EndGame(bool restart = false)
+        public static void RestartGame()
         {
-            if (_score > CurrentUser.HighestScore)
+            if (MessageBox.Show("Do you want to play again?", "Game Over",
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Question) != DialogResult.OK)
             {
-                CurrentUser.HighestScore = _score;
-                SqliteDataAccess.UpdateUser(CurrentUser);
+                ExitProgram(true);
+                Application.Exit();
             }
 
-            if (restart)
+            foreach (var form in Application.OpenForms.OfType<GameForm>())
             {
-                BoardCells = null;
-                CellX = (int) Settings.Default["GridX"];
-                CellY = (int) Settings.Default["GridY"];
-                Application.OpenForms.OfType<GameForm>().First().Close();
-                var gameForm = new GameForm();
-                gameForm.Show();
-                return;
+                form.Hide();
+            }
+            
+            CellX = (int) Settings.Default["GridX"];
+            CellY = (int) Settings.Default["GridY"];
+            _nextTokens = GenerateThreeToken();
+            var gameForm = new GameForm();
+            gameForm.Show();
+        }
+
+        private static void SaveScore()
+        {
+            if (_score > CurrentUser.HighestScore) return;
+            CurrentUser.HighestScore = _score;
+            SqliteDataAccess.UpdateUser(CurrentUser);
+        }
+
+        public static bool ExitProgram(bool byForce = false)
+        {
+            if (!byForce)
+            {
+                if (MessageBox.Show("About to exit program?", "Confirm Exit",
+                        MessageBoxButtons.OKCancel, MessageBoxIcon.Question) != DialogResult.OK)
+                {
+                    return false;
+                }
             }
 
+            foreach (var form in Application.OpenForms.OfType<GameForm>())
+            {
+                form.Hide();
+            }
+            
+            EndGame();
+            return true;
+        }
+
+        private static void EndGame()
+        {
             MessageBox.Show("Game Over.\nScore:" + _score);
-            Application.Exit();
+            SaveScore();
+            _fullCellCount = 0;
+            BoardCells = null;
         }
 
         public static async void SelectCell(Cell panel)
@@ -128,21 +163,20 @@ namespace MyGame.Game
             if (CellX * CellY <= _fullCellCount + 3)
             {
                 EndGame();
+                RestartGame();
+                return;
             }
-            
-            for (int i = 0; i < 3; i++)
+
+            for (var i = 0; i < 3; i++)
             {
                 var point = FindEmptyCell();
-                var token = new Token
-                {
-                    Color = RollColor(),
-                    Shape = RollShape(),
-                };
-                
+                var token = _nextTokens[i];
                 BoardCells[point.X, point.Y].Token = token;
                 CheckForScore(BoardCells[point.X, point.Y]);
                 _fullCellCount++;
             }
+
+            _nextTokens = GenerateThreeToken();
             UpdateGrid();
         }
 
@@ -150,13 +184,13 @@ namespace MyGame.Game
         {
             var horizontalCellSet = SearchRowForward(target, new HashSet<Cell>{target});
             horizontalCellSet.UnionWith(SearchRowBackward(target, horizontalCellSet));
-            bool horizontalScore = horizontalCellSet.Count >= 5;
+            var horizontalScore = horizontalCellSet.Count >= 5;
             
             var verticalCellSet = SearchColumnUpward(target, new HashSet<Cell>{target});
             verticalCellSet.UnionWith(SearchColumnDownward(target, verticalCellSet));
-            bool verticalScore = verticalCellSet.Count >= 5;
+            var verticalScore = verticalCellSet.Count >= 5;
 
-            int totalCount = 0;
+            var totalCount = 0;
             
             if (!horizontalScore && !verticalScore) return false;
             
@@ -176,6 +210,7 @@ namespace MyGame.Game
             _fullCellCount -= totalCount;
             _score += totalCount * GetDifficultyScore();
             UpdateGrid();
+            // TODO: Absolute -> relative path
             var player = new SoundPlayer(@"C:\Users\ovid\Desktop\oop-lab\lab-demo\my-game\MyGame\Properties\Resources\score.wav");
             player.Play();
             return true;
@@ -185,8 +220,8 @@ namespace MyGame.Game
         {
             while (true)
             {
-                int x = Random.Next(CellX);
-                int y = Random.Next(CellY);
+                var x = Random.Next(CellX);
+                var y = Random.Next(CellY);
                 if (BoardCells[x, y].Token is null)
                 {
                     return new Point(x, y);
@@ -226,6 +261,33 @@ namespace MyGame.Game
 
                     cell.ForeColor = color;
                 }
+            }
+
+            for (var i = 0; i < 3; i++)
+            {
+                NextTokenCells[i].Token = _nextTokens[i];
+                var cell = NextTokenCells[i];
+                var token = cell.Token;
+                if (token is null)
+                {
+                    cell.Text = null;
+                    cell.ForeColor = Color.Black;
+                    continue;
+                }
+                var color = token.Color;
+                switch (token.Shape)
+                {
+                    case Enums.Shape.Circle:
+                        cell.Text = "●";
+                        break;
+                    case Enums.Shape.Square:
+                        cell.Text = "■";
+                        break;
+                    case Enums.Shape.Triangle:
+                        cell.Text = "▲";
+                        break;
+                }
+                cell.ForeColor = color;
             }
 
             Score.Text = _score.ToString();
@@ -344,6 +406,7 @@ namespace MyGame.Game
             BoardCells[currentPoint.X, currentPoint.Y].Token = null;
             BoardCells[nextPoint.X, nextPoint.Y].Token = token;
             await Task.Delay(500);
+            // TODO: Absolute -> relative path
             var player = new SoundPlayer(@"C:\Users\ovid\Desktop\oop-lab\lab-demo\my-game\MyGame\Properties\Resources\step.wav");
             player.Play();
             UpdateGrid();
@@ -351,9 +414,9 @@ namespace MyGame.Game
 
         private static Color RollColor()
         {
-            bool isRed = (bool) Settings.Default["Red"];
-            bool isBlue = (bool) Settings.Default["Blue"];
-            bool isGreen = (bool) Settings.Default["Green"];
+            var isRed = (bool) Settings.Default["Red"];
+            var isBlue = (bool) Settings.Default["Blue"];
+            var isGreen = (bool) Settings.Default["Green"];
             var possibleColors = new List<Color>();
             if (isRed) possibleColors.Add(Color.Red);
             if (isBlue) possibleColors.Add(Color.Blue);
@@ -386,6 +449,23 @@ namespace MyGame.Game
                 default:
                     return 2;
             }
+        }
+
+        private static List<Token> GenerateThreeToken()
+        {
+            var nextTokens = new List<Token>();
+            for (var i = 0; i < 3; i++)
+            {
+                var token = new Token
+                {
+                    Color = RollColor(),
+                    Shape = RollShape(),
+                };
+                
+                nextTokens.Add(token);
+            }
+
+            return nextTokens;
         }
     }
 }

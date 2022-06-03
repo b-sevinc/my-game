@@ -67,7 +67,7 @@ namespace MyGame.Forms
                 return;
             }
             
-            var result = MessageBox.Show("Are you sure to delete user(s)?", "Warning",
+            var result = MessageBox.Show("Are you sure to delete user?", "Warning",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
 

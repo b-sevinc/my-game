@@ -54,7 +54,7 @@ namespace MyGame.Forms
 
         private void ConstructBoard(int size, int x, int y)
         {
-            Width = _cellX * TileSize + 50;
+            Width = _cellX * TileSize + 60;
             Height = _cellY * TileSize + adminPanelToolStripMenuItem.Size.Height + 40;
             
             Engine.BoardCells = new Cell[x, y];
@@ -78,22 +78,42 @@ namespace MyGame.Forms
                     newCell.MouseClick += NewPanel_MouseClick;
                 }
             }
-            
-            var score = new Label
-            {
-                Size = new Size(20, 20),
-                Location = new Point(Width - 36, 20),
-                Text = "0",
-            };
 
-            Engine.Score = score;
-            Controls.Add(score);
+            for (var i = 0; i < 3; i++)
+            {
+                var newCell = new Cell
+                {
+                    Size = new Size(20, 20),
+                    Location = new Point(x: Width - 45, 60 + i * 20),
+                    Font = new Font(FontFamily.GenericSansSerif, 10),
+                    AutoSize = false,
+                    TextAlign = ContentAlignment.MiddleCenter,
+                };
+                newCell.BackColor = Color.PeachPuff;
+                Engine.NextTokenCells[i] = newCell;
+                Controls.Add(newCell);
+            }
             
+            Engine.Score = scoreLabel;
+            scoreLabel.Location = new Point(Width - 45, 20);
+            highestLabel.Location = new Point(Width - 45, 40);
+            highestLabel.Text = Engine.CurrentUser.HighestScore.ToString();
         }
 
-        private void GameForm_FormClosed(object sender, FormClosedEventArgs e)
+        private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Engine.EndGame();
+            if (e.CloseReason == CloseReason.ApplicationExitCall) return;
+            e.Cancel = true;
+            var isFinished = Engine.ExitProgram();
+            if (isFinished) Application.Exit();
+        }
+
+        private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var isFinished = Engine.ExitProgram();
+            if (!isFinished) return;
+            var loginForm = new LoginForm();
+            loginForm.Show();
         }
     }
 }
