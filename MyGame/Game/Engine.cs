@@ -77,7 +77,7 @@ namespace MyGame.Game
 
         private static void SaveScore()
         {
-            if (_score > CurrentUser.HighestScore) return;
+            if (_score <= CurrentUser.HighestScore) return;
             CurrentUser.HighestScore = _score;
             SqliteDataAccess.UpdateUser(CurrentUser);
         }
@@ -107,6 +107,7 @@ namespace MyGame.Game
             MessageBox.Show("Game Over.\nScore:" + _score);
             SaveScore();
             _fullCellCount = 0;
+            _score = 0;
             BoardCells = null;
         }
 
@@ -210,8 +211,7 @@ namespace MyGame.Game
             _fullCellCount -= totalCount;
             _score += totalCount * GetDifficultyScore();
             UpdateGrid();
-            // TODO: Absolute -> relative path
-            var player = new SoundPlayer(@"C:\Users\ovid\Desktop\oop-lab\lab-demo\my-game\MyGame\Properties\Resources\score.wav");
+            var player = new SoundPlayer(Resources.score);
             player.Play();
             return true;
         }
@@ -406,8 +406,7 @@ namespace MyGame.Game
             BoardCells[currentPoint.X, currentPoint.Y].Token = null;
             BoardCells[nextPoint.X, nextPoint.Y].Token = token;
             await Task.Delay(500);
-            // TODO: Absolute -> relative path
-            var player = new SoundPlayer(@"C:\Users\ovid\Desktop\oop-lab\lab-demo\my-game\MyGame\Properties\Resources\step.wav");
+            var player = new SoundPlayer(Resources.step);
             player.Play();
             UpdateGrid();
         }

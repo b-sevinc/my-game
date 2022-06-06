@@ -22,7 +22,6 @@ namespace MyGame.Game
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                // TODO: clean this query
                 cnn.Execute("insert into User (Username, Password, FullName, PhoneNumber, City, Country, Email, Address, UserType) " +
                             " values (@Username, @Password, @FullName, @PhoneNumber, @City, @Country, @Email, @Address, @UserType)", user);
             }
@@ -32,7 +31,6 @@ namespace MyGame.Game
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                // TODO: clean this query
                 cnn.Execute("delete from user where Username='"+ user.Username + "'");
             }
         }
@@ -41,7 +39,6 @@ namespace MyGame.Game
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                // TODO: clean this query
                 string sql = "update user set Fullname='" + user.FullName + "', PhoneNumber='" + user.PhoneNumber
                              + "', City='" + user.City + "', Country='" + user.Country + "', Email='" + user.Email
                              + "', Address='" + user.Address + "', UserType='" + user.UserType + "', HighestScore='"
