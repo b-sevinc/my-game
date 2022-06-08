@@ -17,13 +17,6 @@ namespace MyGame.Forms
             usernameMaskedTextbox.Text = Settings.Default["LastUsername"].ToString();
         }
 
-        private static void UserLogin(User user)
-        {
-            Engine.CurrentUser = user;
-            var gameForm = new GameForm();
-            gameForm.Show();
-        }
-
         private void loginButton_Click(object sender, EventArgs e)
         {
             _userList = SqliteDataAccess.LoadUsers();
@@ -36,7 +29,10 @@ namespace MyGame.Forms
 
             var loggedInUser = _userList.Find(user =>
                 user.Username == usernameMaskedTextbox.Text && user.Password == Engine.ToSha256(passwordTextbox.Text));
-            UserLogin(loggedInUser);
+
+            var playModeForm = new PlayModeForm(loggedInUser);
+            playModeForm.Show();
+
             Settings.Default["LastUsername"] = loggedInUser.Username;
             Hide();
         }
