@@ -54,13 +54,16 @@ namespace MyGame.Game
             return CurrentUser.Password == ToSha256(s);
         }
 
-        public static void RestartGame()
+        public static void RestartGame(bool byForce = false)
         {
-            if (MessageBox.Show("Do you want to play again?", "Game Over",
-                    MessageBoxButtons.OKCancel, MessageBoxIcon.Question) != DialogResult.OK)
+            if (!byForce)
             {
-                ExitProgram(true);
-                Application.Exit();
+                if (MessageBox.Show("Do you want to play again?", "Game Over",
+                        MessageBoxButtons.OKCancel, MessageBoxIcon.Question) != DialogResult.OK)
+                {
+                    ExitProgram(true);
+                    Application.Exit();
+                }
             }
 
             foreach (var form in Application.OpenForms.OfType<GameForm>())
@@ -72,6 +75,9 @@ namespace MyGame.Game
             CellY = (int) Settings.Default["GridY"];
             _nextTokens = GenerateThreeToken();
             var gameForm = new GameForm();
+            _fullCellCount = 0;
+            _score = 0;
+            BoardCells = null;
             gameForm.Show();
         }
 
@@ -345,7 +351,7 @@ namespace MyGame.Game
             return SearchColumnDownward(downCell, cells);
         }
 
-        // A* path-finding implementation inspired by dotnetcoretutorials.com/author/admin
+        // A* path-finding implementation
         private static void SearchPath(Cell currentCell, Cell targetCell, List<Point> path)
         {
             var start = new Grid

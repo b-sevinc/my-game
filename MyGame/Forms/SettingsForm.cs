@@ -80,7 +80,7 @@ namespace MyGame.Forms
             Properties.Settings.Default["GridY"] = gridY;
             Properties.Settings.Default.Save();
             Close();
-            Engine.RestartGame();
+            Engine.RestartGame(true);
         }
 
         private int GetMarkedDifficulty()
